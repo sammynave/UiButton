@@ -1,1 +1,7 @@
-<div><h1>Welcome to Glimmer!</h1></div>
+<button class="button"  onclick={{action click}}>
+  {{#if hasClicks}}
+    click count: {{clickCount}}
+  {{else}}
+    click me
+  {{/if}}
+</button>
