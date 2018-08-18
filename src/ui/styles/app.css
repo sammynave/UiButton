@@ -7,3 +7,8 @@
 .ui-button--red {
   background-color: red;
 }
+
+.ui-header {
+  color: #fab;
+  background-color: #222;
+}

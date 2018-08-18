@@ -3,7 +3,6 @@ import initializeCustomElements from '@glimmer/web-component';
 import App from './main';
 
 const app = new App();
-const containerElement = document.getElementById('ui-button');
 
 setPropertyDidChange(() => {
   app.scheduleRerender();
@@ -15,7 +14,10 @@ app.registerInitializer({
   }
 });
 
-app.renderComponent('UiButton', containerElement, null);
+app.renderComponent('App', document.getElementById('app'), null);
 
 app.boot();
-initializeCustomElements(app, { 'ui-button': 'UiButton' });
+initializeCustomElements(app, {
+  'ui-button': 'UiButton',
+  'ui-header': 'UiHeader'
+});
