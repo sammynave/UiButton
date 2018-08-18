@@ -88,7 +88,7 @@ return e&&function(t,e){return Y.call(t,e)}(t,$)?e:t[$]=new U(e)}let Y=Object.pr
 let X=function(){}
 class W extends Error{constructor(t,e,s){super(s),this.target=t,this.key=e}static for(t,e){return new W(t,e,`The property '${e}' on ${t} was changed after being rendered. If you want to change a property used in a template after the component has rendered, mark the property as a tracked property with the @tracked decorator.`)}}function K(t,e,s=function(t,e){throw W.for(t,e)}){if("object"==typeof t&&t){return G(t).tagFor(e)}return y}class q{constructor(t){this.debugName=null,this.__args__=null,Object.assign(this,t)}get element(){let t=this.bounds
 return e(t&&t.firstNode===t.lastNode,"The 'element' property can only be accessed on components that contain a single root element in their template. Try using 'bounds' instead to access the first and last nodes."),t.firstNode}get args(){return this.__args__}set args(t){this.__args__=t,G(this).dirtyableTagFor("args").inner.dirty()}static create(t){return new this(t)}didInsertElement(){}didUpdate(){}willDestroy(){}destroy(){this.willDestroy()}toString(){return`${this.debugName} component`}}const J={dynamicLayout:!1,dynamicTag:!0,prepareArgs:!1,createArgs:!0,attributeHook:!0,elementHook:!0}
-class Z{constructor(t,e,s,i){this.name=t,this.manager=e,this.ComponentClass=s,this.handle=i,this.state={name:t,capabilities:J,ComponentClass:s,handle:i}}toJSON(){return{GlimmerDebug:`<component-definition name="${this.name}">`}}}class Q{constructor(t,e=null){this._registry=t,this._resolver=e,this._lookups={},this._factoryDefinitionLookups={}}factoryFor(t){let e=this._factoryDefinitionLookups[t]
+class Q{constructor(t,e,s,i){this.name=t,this.manager=e,this.ComponentClass=s,this.handle=i,this.state={name:t,capabilities:J,ComponentClass:s,handle:i}}toJSON(){return{GlimmerDebug:`<component-definition name="${this.name}">`}}}class Z{constructor(t,e=null){this._registry=t,this._resolver=e,this._lookups={},this._factoryDefinitionLookups={}}factoryFor(t){let e=this._factoryDefinitionLookups[t]
 if(e||(this._resolver&&(e=this._resolver.retrieve(t)),e||(e=this._registry.registration(t)),e&&(this._factoryDefinitionLookups[t]=e)),e)return this.buildFactory(t,e)}lookup(t){let e=!1!==this._registry.registeredOption(t,"singleton")
 if(e&&this._lookups[t])return this._lookups[t]
 let s=this.factoryFor(t)
@@ -314,13 +314,13 @@ if(-1===i.indexOf(t))return null
 let r=s.get(3*n,e),a=s.get(3*n+1,e),l=s.get(3*n+2,e)
 return null===l?null:[l,a,r]}capture(){return new Xt(this.names,this.values)}}class Xt{constructor(t,e){this.names=t,this.values=e,this.length=t.length}has(t){return-1!==this.names.indexOf(t)}get(t){let e=this.names.indexOf(t)
 return-1===e?null:[this.values[3*e+2],this.values[3*e+1],this.values[3*e]]}}const Wt=new Gt(y,c,c),Kt=new Ut(y,c),qt={tag:y,length:0,positional:Kt,named:Wt},Jt="CURRIED COMPONENT DEFINITION [id=6f00feb9-a0ef-4547-99ea-ac328f80acea]"
-function Zt(t){return!(!t||!t[Jt])}class Qt{constructor(t,e){this.inner=t,this.args=e,this[Jt]=!0}unwrap(t){t.realloc(this.offset)
+function Qt(t){return!(!t||!t[Jt])}class Zt{constructor(t,e){this.inner=t,this.args=e,this[Jt]=!0}unwrap(t){t.realloc(this.offset)
 let e=this
 for(;;){var s=e
 let i=s.args,n=s.inner
-if(i&&(t.positional.prepend(i.positional),t.named.merge(i.named)),!Zt(n))return n
+if(i&&(t.positional.prepend(i.positional),t.named.merge(i.named)),!Qt(n))return n
 e=n}}get offset(){let t=this.inner,e=this.args,s=e?e.positional.length:0
-return Zt(t)?s+t.offset:s}}class te extends gt{static create(t){return new te(t)}toBool(t){return Zt(t)}}rt.add(24,t=>{let e,s=t.stack.pop(),i=t.fetchValue(ot.t0),n=s.value()
+return Qt(t)?s+t.offset:s}}class te extends gt{static create(t){return new te(t)}toBool(t){return Qt(t)}}rt.add(24,t=>{let e,s=t.stack.pop(),i=t.fetchValue(ot.t0),n=s.value()
 e=i?t.elements().appendTrustingDynamicContent(n):t.elements().appendCautiousDynamicContent(n),k(s)||t.updateWith(new ee(s,e)),t.loadValue(ot.t0,null)})
 class ee extends lt{constructor(t,e){super(),this.reference=t,this.content=e,this.tag=t.tag}evaluate(t){let e=this.content,s=this.reference
 e.update(t.env,s.value())}}rt.add(18,t=>t.pushChildScope()),rt.add(19,t=>t.popScope()),rt.add(36,t=>t.pushDynamicScope()),rt.add(37,t=>t.popDynamicScope()),rt.add(10,(t,{op1:e})=>{t.stack.push(t.constants.getOther(e))}),rt.add(11,(t,{op1:e})=>{let s=t.stack,i=e>>3
@@ -375,9 +375,9 @@ i.validate(this.lastRevision)||(this.lastRevision=i.value(),e.update(s.value(),t
 return i}class he{constructor(t,e,s,i){this.inner=t,this.resolver=e,this.meta=s,this.args=i,this.tag=t.tag,this.lastValue=null,this.lastDefinition=null}value(){let t=this.inner,e=this.lastValue,s=t.value()
 if(s===e)return this.lastDefinition
 let i=null
-if(Zt(s))i=s
+if(Qt(s))i=s
 else if("string"==typeof s&&s){i=oe(this.resolver,s,this.meta)}return i=this.curry(i),this.lastValue=s,this.lastDefinition=i,i}get(){return pt}curry(t){let e=this.args
-return!e&&Zt(t)?t:t?new Qt(t,e):null}}function ue(t){return ce(t)?"":String(t)}function ce(t){return null==t||"function"!=typeof t.toString}function pe(t){return"object"==typeof t&&null!==t&&"function"==typeof t.toHTML}function de(t){return"object"==typeof t&&null!==t&&"number"==typeof t.nodeType}function me(t){return de(t)&&11===t.nodeType}function fe(t){return"string"==typeof t}class ge{constructor(t){this.list=t,this.tag=C(t),this.list=t}value(){let t=[],e=this.list
+return!e&&Qt(t)?t:t?new Zt(t,e):null}}function ue(t){return ce(t)?"":String(t)}function ce(t){return null==t||"function"!=typeof t.toString}function pe(t){return"object"==typeof t&&null!==t&&"function"==typeof t.toHTML}function de(t){return"object"==typeof t&&null!==t&&"number"==typeof t.nodeType}function me(t){return de(t)&&11===t.nodeType}function fe(t){return"string"==typeof t}class ge{constructor(t){this.list=t,this.tag=C(t),this.list=t}value(){let t=[],e=this.list
 for(let s=0;s<e.length;s++){let i=ue(e[s].value())
 i&&t.push(i)}return 0===t.length?null:t.join(" ")}}function be(t){return 0|(t.dynamicLayout?1:0)|(t.dynamicTag?2:0)|(t.prepareArgs?4:0)|(t.createArgs?8:0)|(t.attributeHook?16:0)|(t.elementHook?32:0)}function ye(t,e){return!!(t&e)}const ve=new class{constructor(){this.stack=null,this.positional=new zt,this.named=new $t,this.blocks=new Yt}setup(t,e,s,i,n){this.stack=t
 let r=this.named,a=e.length,l=t.sp-a+1
@@ -394,14 +394,14 @@ rt.add(57,t=>{let e=t.stack,s=e.pop()
 e.push(te.create(s))}),rt.add(58,(t,{op1:e})=>{let s=t.stack,i=s.pop(),n=s.pop(),r=t.constants.getSerializable(e),a=t.constants.resolver
 t.loadValue(ot.v0,new he(i,a,r,n))}),rt.add(59,(t,{op1:e})=>{let s=t.constants.resolveHandle(e),i=s.manager,n=be(i.getCapabilities(s.state)),r={definition:s,manager:i,capabilities:n,state:null,handle:null,table:null}
 t.stack.push(r)}),rt.add(62,(e,{op1:s})=>{let i,n=e.stack,r=n.pop().value(),a=e.constants.getSerializable(s)
-if(e.loadValue(ot.t1,null),"string"==typeof r){i=oe(e.constants.resolver,r,a)}else{if(!Zt(r))throw t()
+if(e.loadValue(ot.t1,null),"string"==typeof r){i=oe(e.constants.resolver,r,a)}else{if(!Qt(r))throw t()
 i=r}n.push(i)}),rt.add(60,t=>{let e,s,i=t.stack,n=i.pop()
-Zt(n)?s=e=null:e=be((s=n.manager).getCapabilities(n.state)),i.push({definition:n,capabilities:e,manager:s,state:null,handle:null,table:null})}),rt.add(61,(e,{op1:s})=>{let i,n=e.stack,r=n.pop().value()
-if(!Zt(r))throw t()
+Qt(n)?s=e=null:e=be((s=n.manager).getCapabilities(n.state)),i.push({definition:n,capabilities:e,manager:s,state:null,handle:null,table:null})}),rt.add(61,(e,{op1:s})=>{let i,n=e.stack,r=n.pop().value()
+if(!Qt(r))throw t()
 i=r,n.push(i)}),rt.add(63,(t,{op1:e,op2:s})=>{let i=t.stack,n=t.constants.getStringArray(e),r=s>>4,a=8&s,l=[]
 4&s&&l.push("main"),2&s&&l.push("else"),1&s&&l.push("attrs"),ve.setup(i,n,l,r,!!a),i.push(ve)}),rt.add(66,t=>{let e=t.stack,s=e.pop().capture()
 e.push(s)}),rt.add(65,(t,{op1:e})=>{let s=t.stack,i=t.fetchValue(e),n=s.pop(),r=i.definition
-Zt(r)&&(r=function(t,e,s){let i=t.definition=e.unwrap(s),n=i.manager,r=i.state
+Qt(r)&&(r=function(t,e,s){let i=t.definition=e.unwrap(s),n=i.manager,r=i.state
 return t.manager=n,t.capabilities=be(n.getCapabilities(r)),i}(i,r,n))
 var a=r
 let l=a.manager,o=a.state
@@ -511,7 +511,7 @@ let He=class extends je{constructor(t){super(t),this.document=t,this.namespace=n
 He=Re(Pe,He)
 var ze=He=De(Pe,He,Me)
 const Ue=Ve.DOMTreeConstruction,$e=["javascript:","vbscript:"],Ge=["A","BODY","LINK","IMG","IFRAME","BASE","FORM"],Ye=["EMBED"],Xe=["href","src","background","action"],We=["src"]
-function Ke(t,e){return-1!==t.indexOf(e)}function qe(t,e){return(null===t||Ke(Ge,t))&&Ke(Xe,e)}function Je(t,e){return null!==t&&(Ke(Ye,t)&&Ke(We,e))}function Ze(t,e){return qe(t,e)||Je(t,e)}function Qe(t,e,s,i){let n=null
+function Ke(t,e){return-1!==t.indexOf(e)}function qe(t,e){return(null===t||Ke(Ge,t))&&Ke(Xe,e)}function Je(t,e){return null!==t&&(Ke(Ye,t)&&Ke(We,e))}function Qe(t,e){return qe(t,e)||Je(t,e)}function Ze(t,e,s,i){let n=null
 if(null==i)return i
 if(pe(i))return i.toHTML()
 n=e?e.tagName.toUpperCase():null
@@ -526,10 +526,10 @@ function ss(t,e){let s=t.tagName
 if(t.namespaceURI===Me)return is(s,e)
 var i=ts(t,e)
 let n=i.type,r=i.normalized
-return"attr"===n?is(s,r):function(t,e){if(Ze(t,e))return ls
+return"attr"===n?is(s,r):function(t,e){if(Qe(t,e))return ls
 if(function(t,e){return("INPUT"===t||"TEXTAREA"===t)&&"value"===e}(t,e))return hs
 if(function(t,e){return"OPTION"===t&&"selected"===e}(t,e))return us
-return as}(s,r)}function is(t,e){return Ze(t,e)?os:rs}class ns{constructor(t){this.attribute=t}}class rs extends ns{set(t,e,s){let i=cs(e)
+return as}(s,r)}function is(t,e){return Qe(t,e)?os:rs}class ns{constructor(t){this.attribute=t}}class rs extends ns{set(t,e,s){let i=cs(e)
 if(null!==i){var n=this.attribute
 let e=n.name,s=n.namespace
 t.__setAttribute(e,i,s)}}update(t,e){let s=cs(t)
@@ -541,13 +541,13 @@ let i=s.element,n=s.name
 this.value!==t&&(i[n]=this.value=t,null==t&&this.removeAttribute())}removeAttribute(){var t=this.attribute
 let e=t.element,s=t.name,i=t.namespace
 i?e.removeAttributeNS(i,s):e.removeAttribute(s)}}class ls extends as{set(t,e,s){var i=this.attribute
-let n=Qe(s,i.element,i.name,e)
+let n=Ze(s,i.element,i.name,e)
 super.set(t,n,s)}update(t,e){var s=this.attribute
-let i=Qe(e,s.element,s.name,t)
+let i=Ze(e,s.element,s.name,t)
 super.update(i,e)}}class os extends rs{set(t,e,s){var i=this.attribute
-let n=Qe(s,i.element,i.name,e)
+let n=Ze(s,i.element,i.name,e)
 super.set(t,n,s)}update(t,e){var s=this.attribute
-let i=Qe(e,s.element,s.name,t)
+let i=Ze(e,s.element,s.name,t)
 super.update(i,e)}}class hs extends as{set(t,e){t.__setProperty("value",ue(e))}update(t){let e=this.attribute.element,s=e.value,i=ue(t)
 s!==i&&(e.value=i)}}class us extends as{set(t,e){null!=e&&!1!==e&&t.__setProperty("selected",!0)}update(t){let e=this.attribute.element
 e.selected=!!t}}function cs(t){return!1===t||null==t||void 0===t.toString?null:!0===t?"":"function"==typeof t?null:String(t)}class ps{constructor(t,e,s,i){this.slots=t,this.callerScope=e,this.evalScope=s,this.partialMap=i}static root(t,e=0){let s=new Array(e+1)
@@ -689,10 +689,10 @@ let r=void 0===n?qt:n,a=t.builder,l=this.asLayout().compile(),o=zs.initial(this.
 return new Us(o)}asLayout(){return this.layout?this.layout:this.layout=Ys(this.parsedLayout,this.options,!1)}asPartial(){return this.partial?this.partial:this.partial=Ys(this.parsedLayout,this.options,!0)}}function Ys(t,e,s){let n=t.block,r=t.referrer,a=n.hasEval,l=n.symbols,o=i({},e,{asPartial:s,referrer:r})
 return new Mt(n.statements,t,o,{referrer:r,hasEval:a,symbols:l})}class Xs{get(t){return qs.create(this,t)}}class Ws extends Xs{constructor(){super(...arguments),this._lastRevision=null,this._lastValue=null}value(){let t=this.tag,e=this._lastRevision,s=this._lastValue
 return e&&t.validate(e)||(s=this._lastValue=this.compute(),this._lastRevision=t.value()),s}}class Ks extends M{constructor(){super(...arguments),this.children=a()}get(t){let e=this.children[t]
-return e||(e=this.children[t]=new Js(this.inner,t)),e}}class qs extends Ws{static create(t,e){return k(t)?new Js(t.value(),e):new Zs(t,e)}get(t){return new Zs(this,t)}}class Js extends qs{constructor(t,e){super(),this._parentValue=t,this._propertyKey=e,this.tag=K(t,e)}compute(){return this._parentValue[this._propertyKey]}}class Zs extends qs{constructor(t,e){super()
+return e||(e=this.children[t]=new Js(this.inner,t)),e}}class qs extends Ws{static create(t,e){return k(t)?new Js(t.value(),e):new Qs(t,e)}get(t){return new Qs(this,t)}}class Js extends qs{constructor(t,e){super(),this._parentValue=t,this._propertyKey=e,this.tag=K(t,e)}compute(){return this._parentValue[this._propertyKey]}}class Qs extends qs{constructor(t,e){super()
 let s=t.tag,i=L.create(y)
 this._parentReference=t,this._parentObjectTag=i,this._propertyKey=e,this.tag=x([s,i])}compute(){let t=this._parentReference,e=this._parentObjectTag,s=this._propertyKey,i=t.value()
-return e.inner.update(K(i,s)),"string"==typeof i&&"length"===s?i.length:"object"==typeof i&&i?i[s]:void 0}}class Qs extends Xs{constructor(t){super(),this.tag=_.create(),this._value=t}value(){return this._value}update(t){t!==this._value&&(this.tag.inner.dirty(),this._value=t)}}class ti{constructor(t,e,s){let i=t.ComponentClass,n=t.name
+return e.inner.update(K(i,s)),"string"==typeof i&&"length"===s?i.length:"object"==typeof i&&i?i[s]:void 0}}class Zs extends Xs{constructor(t){super(),this.tag=_.create(),this._value=t}value(){return this._value}update(t){t!==this._value&&(this.tag.inner.dirty(),this._value=t)}}class ti{constructor(t,e,s){let i=t.ComponentClass,n=t.name
 this.args=e
 let r={debugName:n,args:this.namedArgsSnapshot()}
 it(r,s),i&&(this.component=i.create(r))}get tag(){return this.args.tag}namedArgsSnapshot(){return Object.freeze(this.args.named.value())}}const ei=new Ks(null)
@@ -700,10 +700,10 @@ class si{static create(t){return new si(t)}constructor(t){this.env=t.env}prepare
 return new ti(e,s.capture(),t)}}getSelf(t){return t?new Ks(t.component):ei}didCreateElement(t,e){}didRenderLayout(t,e){t&&(t.component.bounds=new nt(e))}didCreate(t){t&&t.component.didInsertElement()}getTag(t){return t?t.tag:y}update(t,e){t&&(t.component.args=t.namedArgsSnapshot())}didUpdateLayout(){}didUpdate(t){t&&t.component.didUpdate()}getDestructor(t){return t?t.component:ii}}const ii={destroy(){}}
 function ni(t,e,s){function i(){return Reflect.construct(HTMLElement,[],i)}i.prototype=Object.create(HTMLElement.prototype,{constructor:{value:i},connectedCallback:{value:function(){let e=document.createElement("span"),i=this.parentNode
 i.insertBefore(e,this),i.removeChild(this),t.renderComponent(s,i,e),function t(e,s){e._rendering?requestAnimationFrame(()=>{t(e,s)}):s()}(t,()=>{let t=e.previousElementSibling
-t&&(e.remove(),function(t,e){let s=t.attributes
+e.remove(),function(t,e){let s=t.attributes
 for(let n=0;n<s.length;n++){var i=s.item(n)
 let t=i.name,r=i.value
-e.setAttribute(t,r)}}(this,t))})}}}),window.customElements.define(e,i)}class ri{constructor(t,e){this._registry=t,this._resolver=e}register(t,e,s){let i=this._toAbsoluteSpecifier(t)
+e.setAttribute(t,r)}}(this,t)})}}}),window.customElements.define(e,i)}class ri{constructor(t,e){this._registry=t,this._resolver=e}register(t,e,s){let i=this._toAbsoluteSpecifier(t)
 this._registry.register(i,e,s)}registration(t){let e=this._toAbsoluteSpecifier(t)
 return this._registry.registration(e)}unregister(t){let e=this._toAbsoluteSpecifier(t)
 this._registry.unregister(e)}registerOption(t,e,s){let i=this._toAbsoluteOrTypeSpecifier(t)
@@ -724,7 +724,7 @@ if(Array.isArray(s))return s.length>0?new li(s,e):hi
 if(null==s)return hi
 if(void 0!==s.forEach){let t=[]
 return s.forEach(function(e){t.push(e)}),t.length>0?new li(t,e):hi}if("object"==typeof s){let t=Object.keys(s)
-return t.length>0?new oi(t,t.map(t=>s[t]),e):hi}throw new Error(`Don't know how to {{#each ${s}}}`)}valueReferenceFor(t){return new Qs(t.value)}updateValueReference(t,e){t.update(e.value)}memoReferenceFor(t){return new Qs(t.memo)}updateMemoReference(t,e){t.update(e.memo)}}class ci extends ms{static create(t={}){return t.document=t.document||self.document,t.appendOperations=t.appendOperations||new Ue(t.document),new ci(t)}constructor(t){super({appendOperations:t.appendOperations,updateOperations:new ze(t.document||document)}),it(this,st(t)),this.uselessAnchor=t.document.createElement("a")}protocolForURL(t){return this.uselessAnchor.href=t,this.uselessAnchor.protocol}iterableFor(t,e){let s
+return t.length>0?new oi(t,t.map(t=>s[t]),e):hi}throw new Error(`Don't know how to {{#each ${s}}}`)}valueReferenceFor(t){return new Zs(t.value)}updateValueReference(t,e){t.update(e.value)}memoReferenceFor(t){return new Zs(t.memo)}updateMemoReference(t,e){t.update(e.memo)}}class ci extends ms{static create(t={}){return t.document=t.document||self.document,t.appendOperations=t.appendOperations||new Ue(t.document),new ci(t)}constructor(t){super({appendOperations:t.appendOperations,updateOperations:new ze(t.document||document)}),it(this,st(t)),this.uselessAnchor=t.document.createElement("a")}protocolForURL(t){return this.uselessAnchor.href=t,this.uselessAnchor.protocol}iterableFor(t,e){let s
 if(!e)throw new Error("Must specify a key for #each")
 switch(e){case"@index":s=((t,e)=>String(e))
 break
@@ -736,8 +736,8 @@ i.push({id:this._rootsIndex++,component:t,parent:e,nextSibling:s}),n&&(n.update(
 t.register(`environment:/${this.rootName}/main/main`,ci),t.registerOption("helper","instantiate",!1),t.registerOption("template","instantiate",!1),t.register(`document:/${this.rootName}/main/main`,this.document),t.registerOption("document","instantiate",!1),t.registerInjection("environment","document",`document:/${this.rootName}/main/main`),t.registerInjection("component-manager","env",`environment:/${this.rootName}/main/main`)
 let s=this._initializers
 for(let i=0;i<s.length;i++)s[i].initialize(e)
-this._initialized=!0}initContainer(){this._container=new Q(this._registry,this.resolver),this._container.defaultInjections=(t=>{let e={}
-return it(e,this),e})}async _render(){let t=this.env,e=this._self=new Qs({roots:this._roots}),s=new ai,i=this.builder.getBuilder(t),n=await this.loader.getTemplateIterator(this,t,i,s,e)
+this._initialized=!0}initContainer(){this._container=new Z(this._registry,this.resolver),this._container.defaultInjections=(t=>{let e={}
+return it(e,this),e})}async _render(){let t=this.env,e=this._self=new Zs({roots:this._roots}),s=new ai,i=this.builder.getBuilder(t),n=await this.loader.getTemplateIterator(this,t,i,s,e)
 try{t.begin(),await this.renderer.render(n),t.commit(),this._didRender()}catch(t){throw this._didError(t),t}}async _rerender(){let t=this.env
 try{t.begin(),await this.renderer.rerender(),t.commit(),this._didRender()}catch(t){throw this._didError(t),t}}_didRender(){this._rendered=!0
 let t=this._notifiers
@@ -748,7 +748,7 @@ return this.handleLookup.push(i),this.cache[t].register(n,e,s),n}lookupModifier(
 if(null===s)throw new Error(`Modifier for ${t} not found.`)
 return s}compileTemplate(t,e){if(!this.cache.compiledTemplate.hasName(t)){let s=this.resolve(e),i=s.block,n=s.meta,r=s.id,a=JSON.parse(i),l=new Gs(this.templateOptions,{id:r,block:a,referrer:n}).asLayout(),o={handle:l.compile(),symbolTable:l.symbolTable}
 return this.register("compiledTemplate",t,o),o}let s=this.lookup("compiledTemplate",t)
-return this.resolve(s)}registerHelper(t,e){return this.register("helper",t,(t,s)=>new fi(e,s))}registerInternalHelper(t,e){this.register("helper",t,e)}registerComponent(t,e,s,i){let n=this.registerTemplate(e,i),r=this.managerFor(n.meta.managerId),a=new Z(t,r,s,n.handle)
+return this.resolve(s)}registerHelper(t,e){return this.register("helper",t,(t,s)=>new fi(e,s))}registerInternalHelper(t,e){this.register("helper",t,e)}registerComponent(t,e,s,i){let n=this.registerTemplate(e,i),r=this.managerFor(n.meta.managerId),a=new Q(t,r,s,n.handle)
 return this.register("component",t,a)}lookupComponentHandle(t,e){return this.cache.component.hasName(t)||this.lookupComponent(t,e),this.lookup("component",t,e)}managerFor(t="main"){let e
 if(this.cache.manager.hasName(t)){let e=this.cache.manager.getHandle(t)
 return this.cache.manager.getByHandle(e)}{let s=this.owner.rootName
@@ -807,7 +807,7 @@ if("number"===e||"boolean"===e)return t.toString()
 if(t.debugName)return t.debugName
 try{return JSON.stringify(t)}catch(t){}return t.toString()}(e)}) `)
 return i}(e)
-throw new Error(`You tried to create an action with the {{action}} helper, but the first argument ${s}was ${typeof t} instead of a function.`)}(n,i.positional.at(0)),new Qs(function(...t){let e=i.positional.value()
+throw new Error(`You tried to create an action with the {{action}} helper, but the first argument ${s}was ${typeof t} instead of a function.`)}(n,i.positional.at(0)),new Zs(function(...t){let e=i.positional.value()
 e.shift(),e.push(...t),n.apply(s&&s.value(),e)})}function Li(t){return t[0]?t[1]:t[2]}class Bi{constructor(t){this.resolver=t}getComponentDefinition(t){let s=this.resolver.resolve(t)
 return e(!!s,`Couldn't find a template for ${t}`),s}getCapabilities(t){let e=this.getComponentDefinition(t),s=e.manager,i=e.state
 return s.getCapabilities(i)}getLayout(t){let e=this.getComponentDefinition(t),s=e.manager.getLayout(e,this.resolver)
@@ -852,8 +852,8 @@ if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decor
 else for(var l=t.length-1;l>=0;l--)(n=t[l])&&(a=(r<3?n(a):r>3?n(e,s,a):n(e,s))||a)
 return r>3&&a&&Object.defineProperty(e,s,a),a}
 class Ui extends q{constructor(){super(...arguments),this.clickCount=0}get hasClicks(){return this.clickCount>0}click(){this.clickCount=this.clickCount+1}}zi([H],Ui.prototype,"clickCount",void 0),zi([H("clickCount")],Ui.prototype,"hasClicks",null)
-var $i={"component:/ui-button/components/UiButton":Ui,"template:/ui-button/components/UiButton":{id:"ZVitZR6s",block:'{"symbols":[],"statements":[[6,"button"],[10,"class","button"],[11,"onclick",[26,"action",[[22,["click"]]],null],null],[8],[0,"\\n"],[4,"if",[[22,["hasClicks"]]],null,{"statements":[[0,"    click count: "],[1,[20,"clickCount"],false],[0,"\\n"]],"parameters":[]},{"statements":[[0,"    click me\\n"]],"parameters":[]}],[9],[0,"\\n"]],"hasEval":false}',meta:{specifier:"template:/ui-button/components/UiButton"}}},Gi={app:{name:"ui-button",rootName:"ui-button"},types:{application:{definitiveCollection:"main"},component:{definitiveCollection:"components"},"component-test":{unresolvable:!0},helper:{definitiveCollection:"components"},"helper-test":{unresolvable:!0},renderer:{definitiveCollection:"main"},template:{definitiveCollection:"components"}},collections:{main:{types:["application","renderer"]},components:{group:"ui",types:["component","component-test","template","helper","helper-test"],defaultType:"component",privateCollections:["utils"]},styles:{group:"ui",unresolvable:!0},utils:{unresolvable:!0}}}
+var $i={"component:/ui-button/components/UiButton":Ui,"template:/ui-button/components/UiButton":{id:"vftMrVFC",block:'{"symbols":[],"statements":[[6,"button"],[11,"class",[27,["ui-button ",[26,"if",[[22,["hasClicks"]],"ui-button--red"],null]]]],[11,"onclick",[26,"action",[[22,["click"]]],null],null],[8],[0,"\\n"],[4,"if",[[22,["hasClicks"]]],null,{"statements":[[0,"    click count: "],[1,[20,"clickCount"],false],[0,"\\n"]],"parameters":[]},{"statements":[[0,"    click me\\n"]],"parameters":[]}],[9],[0,"\\n"]],"hasEval":false}',meta:{specifier:"template:/ui-button/components/UiButton"}}},Gi={app:{name:"ui-button",rootName:"ui-button"},types:{application:{definitiveCollection:"main"},component:{definitiveCollection:"components"},"component-test":{unresolvable:!0},helper:{definitiveCollection:"components"},"helper-test":{unresolvable:!0},renderer:{definitiveCollection:"main"},template:{definitiveCollection:"components"}},collections:{main:{types:["application","renderer"]},components:{group:"ui",types:["component","component-test","template","helper","helper-test"],defaultType:"component",privateCollections:["utils"]},styles:{group:"ui",unresolvable:!0},utils:{unresolvable:!0}}}
 const Yi=new class extends di{constructor(){let t=new Hi($i),e=new Vi(Gi,t)
 const s=document.body
-super({builder:new Ri({element:s,nextSibling:null}),loader:new Di(e),renderer:new Mi,resolver:e,rootName:Gi.app.rootName})}},Xi=document.getElementById("app")
+super({builder:new Ri({element:s,nextSibling:null}),loader:new Di(e),renderer:new Mi,resolver:e,rootName:Gi.app.rootName})}},Xi=document.getElementById("ui-button")
 X=(()=>{Yi.scheduleRerender()}),Yi.registerInitializer({initialize(t){t.register(`component-manager:/${Yi.rootName}/component-managers/main`,si)}}),Yi.renderComponent("UiButton",Xi,null),Yi.boot(),function(t,e){for(let s in e)ni(t,s,e[s])}(Yi,{"ui-button":"UiButton"})})

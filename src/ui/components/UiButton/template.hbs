@@ -1,4 +1,4 @@
-<button class="button"  onclick={{action click}}>
+<button class="ui-button {{if hasClicks "ui-button--red"}}" onclick={{action click}}>
   {{#if hasClicks}}
     click count: {{clickCount}}
   {{else}}

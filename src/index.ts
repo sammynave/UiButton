@@ -3,7 +3,7 @@ import initializeCustomElements from '@glimmer/web-component';
 import App from './main';
 
 const app = new App();
-const containerElement = document.getElementById('app');
+const containerElement = document.getElementById('ui-button');
 
 setPropertyDidChange(() => {
   app.scheduleRerender();
